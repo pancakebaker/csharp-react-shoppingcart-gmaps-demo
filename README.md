@@ -66,7 +66,7 @@ https://localhost:7296
 ### 🎨 Frontend Setup
 
 ```bash
-cd frontend
+cd ShoppingCartUI
 npm install
 ```
 
