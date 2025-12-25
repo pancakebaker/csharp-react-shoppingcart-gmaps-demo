@@ -37,32 +37,6 @@ This project demonstrates clean architecture, state management, unit testing, an
 
 ---
 
-## 📁 Project Structure
-
-```
-ShoppingCartApp/
-├── ShoppingCartApp/              # ASP.NET backend
-│   ├── Models/
-│   ├── Services/
-│   └── Controllers/
-│
-├── ShoppingCartApp.Tests/        # Backend unit tests
-│   └── Services/
-│       └── OrderStoreTests.cs
-│
-└── frontend/                     # React frontend
-    ├── src/
-    │   ├── cart/
-    │   ├── components/
-    │   ├── pages/
-    │   └── tests/
-    ├── .env.example
-    ├── eslint.config.js
-    └── vite.config.js
-```
-
----
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -132,7 +106,7 @@ dotnet test
 ### Frontend
 
 ```bash
-cd frontend
+cd ShoppingCartUI
 npm run test
 ```
 
@@ -151,8 +125,6 @@ npm run test
 
 - No production secrets
 - No real user data
-- Safe for public GitHub repositories
-- `.env` files should **not** be committed — use `.env.example` instead
 
 ---
 
