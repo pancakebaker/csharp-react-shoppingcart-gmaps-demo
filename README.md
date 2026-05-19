@@ -53,13 +53,25 @@ This project demonstrates clean architecture, state management, unit testing, an
 cd ShoppingCartApp
 dotnet restore
 dotnet build
-dotnet run
+dotnet run --project .\ShoppingCartApp\ShoppingCartApp.csproj --launch-profile https
 ```
 
 Backend runs on:
 ```
 https://localhost:7296
 ```
+
+Swagger is available at:
+```
+https://localhost:7296/swagger
+```
+
+If you run the backend without `--launch-profile https`, .NET may use the `http` profile instead:
+```
+http://localhost:5109
+```
+
+In that case, update `VITE_API_BASE` in `ShoppingCartUI/.env` to match the URL printed by `dotnet run`.
 
 ---
 
@@ -72,7 +84,7 @@ npm install
 
 #### Environment Variables
 
-Create a `.env` file inside the `frontend` directory:
+Create a `.env` file inside the `ShoppingCartUI` directory:
 
 ```env
 VITE_API_BASE=https://localhost:7296
