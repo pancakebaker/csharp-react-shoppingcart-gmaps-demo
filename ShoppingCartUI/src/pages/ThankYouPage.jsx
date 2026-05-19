@@ -1,12 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { fetchOrder } from "../api";
 import styles from "./ThankYouPage.module.css";
-
-async function fetchOrder(orderId) {
-    const res = await fetch(`/api/orders/${orderId}`);
-    if (!res.ok) throw new Error("Order not found or failed to load.");
-    return res.json();
-}
 
 export default function ThankYouPage() {
     const { orderId } = useParams();

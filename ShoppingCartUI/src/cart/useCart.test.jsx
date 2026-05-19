@@ -30,7 +30,7 @@ describe("useCart", () => {
             result.current.addToCart({ id: 1, name: "Apple", price: 10 });
         });
 
-        expect(result.current.items[0].qty).toBe(3);
+        expect(result.current.items[0].qty).toBe(2);
     });
 
     it("removes item from cart", () => {
@@ -52,8 +52,8 @@ describe("useCart", () => {
             result.current.addToCart({ id: 2, name: "Banana", price: 5 });
         });
 
-        // totals keys vary; ensure some value equals 15
-        expect(Object.values(result.current.totals)).toContain(15);
+        expect(result.current.totals.count).toBe(2);
+        expect(result.current.totals.total).toBe(15);
     });
 
 });
