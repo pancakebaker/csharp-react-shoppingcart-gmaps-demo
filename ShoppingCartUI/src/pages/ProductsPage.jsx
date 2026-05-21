@@ -2,17 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../api";
 import { useCart } from "../cart/useCart"; // adjust if your hook path differs
+import { setPageMeta } from "../seo";
 import styles from "./ProductsPage.module.css";
 
-function ProductCard({ product, onAdd }) {
+function ProductCard({ product, onAdd, priority = false }) {
   return (
     <article className={styles.card}>
       <div className={styles.imageWrap}>
         <img
           className={styles.image}
           src={product.imageUrl}
-          alt={product.name}
-          loading="lazy"
+          alt={`${product.name} product photo`}
+          width="800"
+          height="800"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
         />
       </div>
 
@@ -46,6 +51,14 @@ export default function ProductsPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    setPageMeta({
+      title: "Products | C# React Shopping Cart Demo",
+      description:
+        "Browse electronics products in a portfolio-ready ASP.NET Core and React shopping cart demo.",
+    });
+  }, []);
+
+  useEffect(() => {
     let cancelled = false;
 
     (async () => {
@@ -71,7 +84,7 @@ export default function ProductsPage() {
   }, []);
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <header className={styles.topbar}>
         <div>
           <h1 className={styles.pageTitle}>Products</h1>
@@ -102,10 +115,15 @@ export default function ProductsPage() {
       )}
 
       <section className={styles.grid} aria-label="Product list">
-        {products.map((p) => (
-          <ProductCard key={p.id} product={p} onAdd={addToCart} />
+        {products.map((p, index) => (
+          <ProductCard
+            key={p.id}
+            product={p}
+            onAdd={addToCart}
+            priority={index === 0}
+          />
         ))}
       </section>
-    </div>
+    </main>
   );
 }

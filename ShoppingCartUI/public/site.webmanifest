@@ -1,0 +1,9 @@
+{
+  "name": "C# React Shopping Cart Demo",
+  "short_name": "Shopping Cart",
+  "description": "ASP.NET Core and React shopping cart demo with checkout and Google Maps delivery pin selection.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111111"
+}

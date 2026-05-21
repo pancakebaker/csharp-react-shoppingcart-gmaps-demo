@@ -1,6 +1,7 @@
-import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../cart/useCart"; // adjust if your path differs
+import { setPageMeta } from "../seo";
 import styles from "./CartPage.module.css";
 
 function QtyButton({ children, onClick, label }) {
@@ -21,8 +22,16 @@ export default function CartPage() {
 
   const isEmpty = items.length === 0;
 
+  useEffect(() => {
+    setPageMeta({
+      title: "Cart | C# React Shopping Cart Demo",
+      description:
+        "Review cart items, update quantities, and continue to checkout in this ASP.NET Core and React demo.",
+    });
+  }, []);
+
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <header className={styles.topbar}>
         <div>
           <h1 className={styles.title}>Your Cart</h1>
@@ -58,8 +67,11 @@ export default function CartPage() {
                 <img
                   className={styles.thumb}
                   src={product.imageUrl}
-                  alt={product.name}
+                  alt={`${product.name} product photo`}
+                  width="800"
+                  height="800"
                   loading="lazy"
+                  decoding="async"
                 />
 
                 <div className={styles.itemInfo}>
@@ -141,6 +153,6 @@ export default function CartPage() {
           </aside>
         </div>
       )}
-    </div>
+    </main>
   );
 }

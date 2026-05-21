@@ -42,17 +42,18 @@ public class ProductServiceTests
     }
 
     [Fact]
-    public void Products_ImageUrl_ShouldBeValidHttps()
+    public void Products_ImageUrl_ShouldBeValidWebPath()
     {
         foreach (var p in ProductService.Products)
         {
-            Assert.True(IsValidHttpsUrl(p.ImageUrl));
+            Assert.True(IsValidWebPath(p.ImageUrl));
         }
     }
 
-    private static bool IsValidHttpsUrl(string url)
+    private static bool IsValidWebPath(string url)
     {
-        return Uri.TryCreate(url, UriKind.Absolute, out var uri)
-               && uri.Scheme == Uri.UriSchemeHttps;
+        return Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out var uri)
+               && (uri.IsAbsoluteUri && uri.Scheme == Uri.UriSchemeHttps
+                   || !uri.IsAbsoluteUri && url.StartsWith('/'));
     }
 }

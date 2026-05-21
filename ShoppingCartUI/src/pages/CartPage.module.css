@@ -15,7 +15,7 @@
 .title {
   margin: 0;
   font-size: 28px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .subtitle {
@@ -110,7 +110,7 @@
 .itemTitle {
   margin: 0;
   font-size: 16px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 
   overflow: hidden;
   text-overflow: ellipsis;

@@ -4,6 +4,7 @@ import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { useCart } from "../cart/useCart"; // adjust path if needed
 import styles from "./CheckoutPage.module.css";
 import { createOrder } from "../api";
+import { setPageMeta } from "../seo";
 
 const MAP_CONTAINER_STYLE = { width: "100%", height: "360px" };
 
@@ -22,6 +23,14 @@ export default function CheckoutPage() {
     const [touched, setTouched] = useState({});
     const [submitError, setSubmitError] = useState("");
     const [placedOrder, setPlacedOrder] = useState(false);
+
+    useEffect(() => {
+        setPageMeta({
+            title: "Checkout | C# React Shopping Cart Demo",
+            description:
+                "Enter customer details and choose a Google Maps delivery pin in this React checkout demo.",
+        });
+    }, []);
 
     useEffect(() => {
         if (!placedOrder && items.length === 0) {
@@ -146,7 +155,6 @@ export default function CheckoutPage() {
             const result = await createOrder(payload);
             setPlacedOrder(true);
             clearCart();
-            console.log("createOrder result:", result);
             navigate(`/thank-you/${result.orderId}`, { replace: true });
         } catch (e) {
             setSubmitError(e?.message || "Failed to place order.");
@@ -155,7 +163,7 @@ export default function CheckoutPage() {
 
     if (!apiKey) {
         return (
-            <div className={styles.page}>
+            <main className={styles.page}>
                 <header className={styles.topbar}>
                     <h1 className={styles.title}>Checkout</h1>
                     <Link to="/cart" className={styles.link}>Back to Cart</Link>
@@ -164,12 +172,12 @@ export default function CheckoutPage() {
                 <div className={styles.stateBoxError} role="alert">
                     Missing <code>VITE_GOOGLE_MAPS_API_KEY</code>. Add it to <code>.env</code> and restart Vite.
                 </div>
-            </div>
+            </main>
         );
     }
 
     return (
-        <div className={styles.page}>
+        <main className={styles.page}>
             <header className={styles.topbar}>
                 <div>
                     <h1 className={styles.title}>Checkout</h1>
@@ -316,9 +324,9 @@ export default function CheckoutPage() {
                 </button>
 
                 <p className={styles.note}>
-                    (Next step: we can POST this checkout + cart to your .NET backend as an Order.)
+                    Orders are priced and stored by the ASP.NET Core backend.
                 </p>
             </form>
-        </div>
+        </main>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchOrder } from "../api";
+import { setPageMeta } from "../seo";
 import styles from "./ThankYouPage.module.css";
 
 export default function ThankYouPage() {
@@ -8,6 +9,14 @@ export default function ThankYouPage() {
     const [status, setStatus] = useState("loading"); // loading | success | error
     const [error, setError] = useState("");
     const [order, setOrder] = useState(null);
+
+    useEffect(() => {
+        setPageMeta({
+            title: "Order Confirmation | C# React Shopping Cart Demo",
+            description:
+                "View the order confirmation, customer details, delivery pin, and order totals from the ASP.NET Core backend.",
+        });
+    }, []);
 
     useEffect(() => {
         let cancelled = false;
@@ -44,7 +53,7 @@ export default function ThankYouPage() {
     }, [order]);
 
     return (
-        <div className={styles.page}>
+        <main className={styles.page}>
             <header className={styles.topbar}>
                 <div>
                     <h1 className={styles.title}>Thank you!</h1>
@@ -174,6 +183,6 @@ export default function ThankYouPage() {
                     </aside>
                 </div>
             )}
-        </div>
+        </main>
     );
 }

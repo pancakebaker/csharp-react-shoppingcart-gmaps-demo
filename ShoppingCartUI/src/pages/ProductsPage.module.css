@@ -15,7 +15,7 @@
 .pageTitle {
   margin: 0;
   font-size: 28px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .subtitle {
@@ -122,7 +122,7 @@
   margin: 0;
   font-size: 16px;
   line-height: 1.2;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 
   /* prevent layout shift / overflow */
   overflow: hidden;
